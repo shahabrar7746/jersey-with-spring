@@ -1,5 +1,6 @@
 package com.poc.api_impl.entity;
 
+import com.poc.api.dto.CollegeDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -117,4 +118,28 @@ public class College {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    public void updateDto(CollegeDto dto)
+    {
+        dto.setAddress(this.getAddress());
+        dto.setCity(this.getCity());
+        dto.setEmail(this.getEmail());
+        dto.setName(this.getName());
+        dto.setPhoneNumber(this.getPhoneNumber());
+    }
+
+    public void updateEntity(CollegeDto dto)
+    {
+        String updatedEmail = dto.getEmail() == null ? this.getEmail() : dto.getEmail();
+        String updatedPhoneNumber = dto.getPhoneNumber() == null ? this.getPhoneNumber() : dto.getPhoneNumber();
+        String updatedName = dto.getName() == null ? this.getName() : dto.getName();
+        String updatedCity = dto.getCity() == null ? this.getCity() : dto.getCity();
+        String updatedAddress = dto.getAddress() == null ? this.getAddress() : dto.getAddress();
+        this.setAddress(updatedAddress);
+        this.setCity(updatedCity);
+        this.setName(updatedName);
+        this.setCity(updatedCity);
+        this.setEmail(updatedEmail);
+        this.setPhoneNumber(updatedPhoneNumber);
+    }
 }
